@@ -15,6 +15,7 @@ Including another URLconf
 """
 
 from django.urls import path, include
+from django.views.generic import RedirectView
 from rest_framework.routers import DefaultRouter
 from . import views
 
@@ -26,6 +27,7 @@ router.register(r'workouts', views.WorkoutViewSet)
 router.register(r'leaderboard', views.LeaderboardViewSet)
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='/api/', permanent=False), name='root'),
     path('api/', views.api_root, name='api_root'),
     path('api/', include(router.urls)),
 ]
